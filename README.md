@@ -1,2 +1,3 @@
-# advent_of_code_2020
-Advent of Code 2020 using Julia
+# Advent of Code 2020
+
+My solutions for Advent of Code 2020 implemented in Julia
