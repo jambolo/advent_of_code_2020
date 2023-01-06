@@ -13,10 +13,9 @@ function day02()
         readlines(f)
     end
 
-    attempts = Password[]
-    re = r"([0-9]+)-([0-9]+) ([a-z]): ([a-z]+)"
+    attempts = Array{Password, 1}()
     for line in lines
-        m = match(re, line)
+        m = match(r"(\d+)-(\d+) (\w): (\w+)", line)
         captures = m.captures
         password = Password(parse(Int64, captures[1]), parse(Int64, captures[2]), captures[3][1], captures[4])
         push!(attempts, password)

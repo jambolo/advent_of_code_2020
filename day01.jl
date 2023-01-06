@@ -1,58 +1,48 @@
 # Advent Of Code 2020
 # Day 1
 
-function day01part1()
+function day01()
     lines = open("day01-input.txt") do f
         readlines(f)
     end
 
-    lineslength = length(lines) # Fixes IndexFromLength warning
-    found = false
-    for i in 2:lineslength
-        ni = parse(Int64, lines[i])
+    expenses = Array{Int64, 1}()
+    for line in lines
+        push!(expenses, parse(Int64, line))
+    end
+
+    day01_part1(expenses)
+    day01_part2(expenses)
+end
+
+function day01_part1(expenses::Array{Int64, 1})
+
+    expenseslength = length(expenses) # Fixes IndexFromLength warning
+    for i in 2:expenseslength
+        ei = expenses[i]
         for j in 1:i-1
-            nj = parse(Int64, lines[j])
-            if ni + nj == 2020
-                println("Numbers are $ni and $nj, and product is $(ni * nj)")
-                found = true
+            ej = expenses[j]
+            if ei + ej == 2020
+                println("Part 1: Numbers are $ei and $ej, and product is $(ei * ej)")
+                return
             end
-            found && break
         end
-        found && break
-    end
-    if !found
-        println("none found")
     end
 end
 
-day01part1()
-
-function day01part2()
-    lines = open("day01-input.txt") do f
-        readlines(f)
-    end
-
-    lineslength = length(lines) # Fixes IndexFromLength warning
-    found = false
-    for i in 3:lineslength
-        ni = parse(Int64, lines[i])
+function day01_part2(expenses::Array{Int64, 1})
+    expenseslength = length(expenses) # Fixes IndexFromLength warning
+    for i in 3:expenseslength
+        ei = expenses[i]
         for j in 2:i-1
-            nj = parse(Int64, lines[j])
+            ej = expenses[j]
             for k in 1:j-1
-                nk = parse(Int64, lines[k])
-                if ni + nj + nk == 2020
-                    println("Numbers are $ni and $nj and $nk, and product is $(ni * nj * nk)")
-                    found = true
+                ek = expenses[k]
+                if ei + ej + ek == 2020
+                    println("Part 2: Numbers are $ei and $ej and $ek, and product is $(ei * ej * ek)")
+                    return
                 end
-                found && break
             end
-            found && break
         end
-        found && break
-    end
-    if !found
-        println("none found")
     end
 end
-
-day01part2()
