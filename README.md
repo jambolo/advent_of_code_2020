@@ -20,3 +20,6 @@ Basic binary conversion.
 
 ### Day 6
 Support of sets in Julia helped.
+
+### Day 7
+Had problems with mutability and recursion in julia. I had problems with a complicated regex and a clunky IDE.
