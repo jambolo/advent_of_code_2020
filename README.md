@@ -14,3 +14,6 @@ Trivial again. Modular arithmetic is a pain when dealing with array indexes beca
 
 ### Day 4
 Tedious, but trivial again due to regex support.
+
+### Day 5
+Trivial. Basic binary conversion.
