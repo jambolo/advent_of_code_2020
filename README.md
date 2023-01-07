@@ -11,3 +11,6 @@ functions with predicates and the fact that comparisons can be chained.
 
 ### Day 3
 Trivial again. Modular arithmetic is a pain when dealing with array indexes because of the 1-based indexing.
+
+### Day 4
+Tedious, but trivial again due to regex support.
