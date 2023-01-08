@@ -26,3 +26,6 @@ Had problems with mutability and recursion in julia. I had problems with a compl
 
 ### Day 8
 Probably could have optimized, but there is no need. Waiting to get to some meaty vector reduction puzzles that can show the power of julia.
+
+### Day 9
+One annoyance with julia is that there are many library names in the global namespace that cannot be used for variable names. Names like *sum* and *count* are sometimes unavailable.
