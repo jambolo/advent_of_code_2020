@@ -28,4 +28,7 @@ Had problems with mutability and recursion in julia. I had problems with a compl
 Probably could have optimized, but there is no need. Waiting to get to some meaty vector reduction puzzles that can show the power of julia.
 
 ### Day 9
-One annoyance with julia is that there are many library names in the global namespace that cannot be used for variable names. Names like *sum* and *count* are sometimes unavailable.
+One annoyance with julia is that there are **many** library names in the global namespace that sometimes (for reasons that are not clear to me) will collide with local names.
+
+### Day 10
+Finally, a puzzle with a little bit of a challenge. Is there a way to create a Dict element initialized to 0 simply by referencing it? I could avoid having to use haskey() to know if I need to create the entry first.
