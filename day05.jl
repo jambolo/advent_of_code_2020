@@ -10,23 +10,16 @@ function day05()
         readlines(f)
     end
 
-    if !part1
-        occupied = fill(false, 1024)
-    end
-    highest = 0
-    for line in lines
-        id = to_id(line)
-        if id > highest
-            highest = id
-        end
-        if !part1
-            occupied[id + 1] = true
-        end
-    end
-    
+    highest = maximum(to_id.(lines))
     println("Highest id is $highest")
 
     if !part1
+        occupied = fill(false, 1024)
+        for line in lines
+            id = to_id(line)
+            occupied[id + 1] = true
+        end
+
         i = 1
         while !occupied[i]
             i += 1

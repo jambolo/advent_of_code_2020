@@ -13,13 +13,7 @@ function day02()
         readlines(f)
     end
 
-    attempts = Array{Password, 1}()
-    for line in lines
-        m = match(r"(\d+)-(\d+) (\w): (\w+)", line)
-        captures = m.captures
-        password = Password(parse(Int64, captures[1]), parse(Int64, captures[2]), captures[3][1], captures[4])
-        push!(attempts, password)
-    end
+    attempts = parseline.(lines)
 
     part1n = 0
     part2n = 0
@@ -34,3 +28,9 @@ function day02()
 
     println("$part1n valid part 1 passwords and $part2n valid part 2 passwords.")
 end
+
+function parseline(line::String)
+    m = match(r"(\d+)-(\d+) (\w): (\w+)", line)
+    return Password(parse(Int64, m[1]), parse(Int64, m[2]), m[3][1], m[4])
+end
+

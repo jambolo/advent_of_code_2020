@@ -45,17 +45,9 @@ function day06()
         push!(intersections, intersection)
     end
 
-    part1sum = 0
-    for g in groups
-        part1sum += length(g)
-    end
-
+    part1sum = sum(length, groups)
     println("part1sum is $part1sum")
 
-    part2sum = 0
-    for i in intersections
-        part2sum += length(i)
-    end
-
+    part2sum = sum(length, intersections)
     println("part2sum is $part2sum")
 end

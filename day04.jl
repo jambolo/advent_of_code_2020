@@ -16,7 +16,7 @@ function day04()
         if length(line) > 0
             for s in eachsplit(line)
                 m = match(r"(\w+):(.+)", s)
-                passport[m.captures[1]] = m.captures[2]
+                passport[m[1]] = m[2]
             end
         else
             if isvalid(passport)
@@ -25,100 +25,53 @@ function day04()
             passport = Dict{String, String}()
         end
     end
-    if !isempty(passport)
-        if isvalid(passport)
-            count += 1
-        end
+    if !isempty(passport) && isvalid(passport)
+        count += 1
     end
     println("$count valid passports.")
 end
 
 function isvalid(passport::Dict{String, String})
-    missing = Set{String}()
     if !("byr" in keys(passport)) || (!part1 && !isvalidbyr(passport["byr"]))
-        push!(missing, "byr")
+        return false
+    elseif !("iyr" in keys(passport)) || (!part1 && !isvalidiyr(passport["iyr"]))
+        return false
+    elseif !("eyr" in keys(passport)) || (!part1 && !isvalideyr(passport["eyr"]))
+        return false
+    elseif !("hgt" in keys(passport)) || (!part1 && !isvalidhgt(passport["hgt"]))
+        return false
+    elseif !("hcl" in keys(passport)) || (!part1 && !isvalidhcl(passport["hcl"]))
+        return false
+    elseif !("ecl" in keys(passport)) || (!part1 && !isvalidecl(passport["ecl"]))
+        return false
+    elseif !("pid" in keys(passport)) || (!part1 && !isvalidpid(passport["pid"]))
+        return false
     end
-    if !("iyr" in keys(passport)) || (!part1 && !isvalidiyr(passport["iyr"]))
-        push!(missing, "iyr")
-    end
-    if !("eyr" in keys(passport)) || (!part1 && !isvalideyr(passport["eyr"]))
-        push!(missing, "eyr")
-    end
-    if !("hgt" in keys(passport)) || (!part1 && !isvalidhgt(passport["hgt"]))
-        push!(missing, "hgt")
-    end
-    if !("hcl" in keys(passport)) || (!part1 && !isvalidhcl(passport["hcl"]))
-        push!(missing, "hcl")
-    end
-    if !("ecl" in keys(passport)) || (!part1 && !isvalidecl(passport["ecl"]))
-        push!(missing, "ecl")
-    end
-    if !("pid" in keys(passport)) || (!part1 && !isvalidpid(passport["pid"]))
-        push!(missing, "pid")
-    end
-    if !("cid" in keys(passport))
-        push!(missing, "cid")
-    end
-
-    return (length(missing) == 0) || (length(missing) == 1 && "cid" in missing)
+    return true
 end
 
-function isvalidbyr(s::String)
-    if match(r"^\d{4}$", s) !== nothing
-        year = parse(Int64, s)
-        if 1920 <= year <= 2002
-            return true
-        end
-    end
-    return false
-end
-
-function isvalidiyr(s::String)
-    if match(r"^\d{4}$", s) !== nothing
-        year = parse(Int64, s)
-        if 2010 <= year <= 2020
-            return true
-        end
-    end
-    return false
-end
-
-function isvalideyr(s::String)
-    if match(r"^\d{4}$", s) !== nothing
-        year = parse(Int64, s)
-        if 2020 <= year <= 2030
-            return true
-        end
-    end
-    return false
-end
+isvalidbyr(s::String) = match(r"^\d{4}$", s) !== nothing && 1920 <= parse(Int64, s) <= 2002
+isvalidiyr(s::String) = match(r"^\d{4}$", s) !== nothing && 2010 <= parse(Int64, s) <= 2020
+isvalideyr(s::String) = match(r"^\d{4}$", s) !== nothing && 2020 <= parse(Int64, s) <= 2030
 
 function isvalidhgt(s::String)
-    m = match(r"^((\d+)in)|((\d+)cm)$", s)
-    if m !== nothing
-        if m.captures[1] !== nothing
-            height = parse(Int64, m.captures[2])
-            if 59 <= height <= 76
-                return true
-            end
-        elseif m.captures[3] !== nothing
-            height = parse(Int64, m.captures[4])
-            if 150 <= height <= 193
-                return true
-            end
+    m = match(r"^(\d+)(in|cm)$", s)
+    if m === nothing
+        return false
+    end
+    height = parse(Int64, m[1])
+    if m[2] == "in"
+        if 59 <= height <= 76
+            return true
+        end
+    else
+        if 150 <= height <= 193
+            return true
         end
     end
     return false
 end
 
-function isvalidhcl(s::String)
-    return match(r"^#[0-9a-zA-Z]{6}$", s) !== nothing
-end
-
-function isvalidecl(s::String)
-    return match(r"^(amb)|(blu)|(brn)|(gry)|(grn)|(hzl)|(oth)$", s) !== nothing
-end 
-
-function isvalidpid(s::String)
-    return match(r"^\d{9}$", s) !== nothing
-end
+isvalidhcl(s::String) = match(r"^#[0-9a-zA-Z]{6}$", s) !== nothing
+isvalidecl(s::String) = match(r"^(amb)|(blu)|(brn)|(gry)|(grn)|(hzl)|(oth)$", s) !== nothing
+isvalidpid(s::String) = match(r"^\d{9}$", s) !== nothing

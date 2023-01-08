@@ -25,17 +25,17 @@ function day07()
     for line in lines
         substrings = split(line, ',')
         m = match(r"(\w+ \w+) bags contain (?:(?:no other)|(?:(\d+) (\w+ \w+))) bag", substrings[begin])
-        name = m.captures[1]
+        name = m[1]
         bag = BagInfo(Array{Group, 1}(), Dict{String, Int64}())
-        if m.captures[2] !== nothing
-            count = parse(Int64, m.captures[2])
-            other = m.captures[3]
+        if m[2] !== nothing
+            count = parse(Int64, m[2])
+            other = m[3]
             push!(bag.contains, Group(other, count))
         end
         for s in substrings[2:end]
             m = match(r"(\d+) (\w+ \w+) bag", s)
-            count = parse(Int64, m.captures[1])
-            other = m.captures[2]
+            count = parse(Int64, m[1])
+            other = m[2]
             push!(bag.contains, Group(other, count))
         end
         bags[name] = bag
@@ -55,13 +55,7 @@ function day07()
         end
     end
 
-    count = 0
-    for bag in values(bags)
-        if "shiny gold" in keys(bag.sums)
-            count += 1
-        end
-    end
-
+    count = count(bag -> "shiny gold" in keys(bag.sums), value(bags))
     println("shiny gold bags are contained in $count bags")
 
     if !part1
