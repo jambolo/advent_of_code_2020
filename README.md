@@ -23,3 +23,6 @@ Support of sets in Julia helped.
 
 ### Day 7
 Had problems with mutability and recursion in julia. I had problems with a complicated regex and a clunky IDE.
+
+### Day 8
+Probably could have optimized, but there is no need. Waiting to get to some meaty vector reduction puzzles that can show the power of julia.
