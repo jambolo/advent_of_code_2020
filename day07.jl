@@ -46,7 +46,7 @@ function day07()
             groups = Array{Group, 1}()
             include!(bags, groups, c)
             for g in groups
-                if g.name in keys(bag.sums)
+                if haskey(bag.sums, g.name)
                     bag.sums[g.name] += g.count
                 else
                     bag.sums[g.name] = g.count
