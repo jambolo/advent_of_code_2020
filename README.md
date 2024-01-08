@@ -1,6 +1,6 @@
 # Advent of Code 2020
 
-My solutions for Advent of Code 2020 implemented in Julia
+My solutions for Advent of Code 2020 implemented in Julia. The development environment is VS Code and Ubuntu via WSL.
 
 ### Day 1
 Julia provides no extra benefit.
